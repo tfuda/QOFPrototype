@@ -1,0 +1,4 @@
+.idea
+dist
+sfdc-dist
+node_modules
