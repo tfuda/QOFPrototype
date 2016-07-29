@@ -7,7 +7,7 @@ class Header extends Component {
 				<div className="slds-media slds-media--center">
 					<div className="slds-media__figure">
 						<svg aria-hidden="true" className="slds-icon slds-icon-standard-opportunity">
-							<use xlinkHref="../node_modules/@salesforce-ux/design-system/assets/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+							<use xlinkHref={sldsRoot + "/assets/icons/standard-sprite/svg/symbols.svg#opportunity"}/>
 						</svg>
 					</div>
 					<div className="slds-media__body">

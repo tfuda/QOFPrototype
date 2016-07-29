@@ -11,7 +11,7 @@ export default function itemList(state = [], action) {
 			return state;
 		case DELETE_ITEM:
 			let itemList = state.filter(function (item) {
-				return item.name !== action.itemName;
+				return item.Name !== action.itemName;
 			});
 			return itemList;
 		case DELETE_ALL_ITEMS:

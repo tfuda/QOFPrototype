@@ -16,7 +16,7 @@ function calculateOrderTotal(itemTotal = 0, orderFee = 0, deliveryFee = 0, donat
 function calculateItemTotal(itemList) {
 	let itemTotal = 0;
 	itemList.forEach(function (item) {
-		itemTotal += item.total
+		itemTotal += item.OrderItemTotal__c
 	});
 	return itemTotal;
 }
@@ -27,29 +27,29 @@ export default function order(state = {}, action, itemList) {
 		case DELETE_ITEM:
 		case DELETE_ALL_ITEMS:
 			let newItemTotal = calculateItemTotal(itemList);
-			let newOrderTotal = calculateOrderTotal(newItemTotal, state.orderFee, state.deliveryFee, state.donationAmount);
+			let newOrderTotal = calculateOrderTotal(newItemTotal, state.Fees__c, state.ShippingFee__c, state.DonationAmount__c);
 			return Object.assign({}, state, {
-				itemTotal: newItemTotal,
-				orderTotal: newOrderTotal
+				Subtotal__c: newItemTotal,
+				OrderTotal__c: newOrderTotal
 			});
 		case CHANGE_DONATION:
 			return Object.assign({}, state, {
-				donationAmount: action.donationAmount,
-				orderTotal: calculateOrderTotal(state.itemTotal, state.orderFee, state.deliveryFee, action.donationAmount)
+				DonationAmount__c: action.donationAmount,
+				OrderTotal__c: calculateOrderTotal(state.Subtotal__c, state.Fees__c, state.ShippingFee__c, action.donationAmount)
 			});
 		case CHANGE_DELIVERY_METHOD:
 			let deliveryFee = (action.deliveryMethod === 'Ship') ? 3.00 : 0.00;
 			return Object.assign({}, state, {
-				deliveryMethod: action.deliveryMethod,
-				deliveryFee: deliveryFee,
-				orderTotal: calculateOrderTotal(state.itemTotal, state.orderFee, deliveryFee, state.donationAmount)
+				DeliveryMethod__c: action.deliveryMethod,
+				ShippingFee__c: deliveryFee,
+				OrderTotal__c: calculateOrderTotal(state.Subtotal__c, state.Fees__c, deliveryFee, state.DonationAmount__c)
 			});
 		case COPY_BILLING_TO_SHIPPING:
 			return Object.assign({}, state, {
-				shippingStreet: state.billingStreet,
-				shippingCity: state.billingCity,
-				shippingState: state.billingState,
-				shippingPostalCode: state.billingPostalCode
+				ShippingStreet__c: state.Street__c,
+				ShippingCity__c: state.City__c,
+				ShippingState__c: state.State__c,
+				ShippingPostalCode__c: state.PostalCode__c
 			});
 		case INPUT_CHANGE:
 			let newFieldValue = {};

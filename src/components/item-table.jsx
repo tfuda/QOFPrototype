@@ -7,8 +7,12 @@ class ItemTable extends React.Component {
 	}
 	
 	render() {
+		if (this.props.itemList.length == 0) {
+			return (<div></div>);
+		}
+		
 		let itemRows = this.props.itemList.map(function (item) {
-			return <ItemRow key={item.name} item={item} onClick={() => this.props.onDeleteItem(item.name)}/>;
+			return <ItemRow key={item.Name} item={item} onClick={() => this.props.onDeleteItem(item.Name)}/>;
 		}, this);
 		return (
 			<div className="slds-grid slds-wrap slds-grid--pull-padded slds-p-around--medium">
@@ -19,8 +23,7 @@ class ItemTable extends React.Component {
 							<th>
 								<button className="slds-button slds-button--icon" onClick={this.props.onDeleteAllItems}>
 									<svg aria-hidden="true" className="slds-button__icon">
-										<use
-											xlinkHref="../node_modules/@salesforce-ux/design-system/assets/icons/action-sprite/svg/symbols.svg#remove"></use>
+										<use xlinkHref={sldsRoot + "/assets/icons/action-sprite/svg/symbols.svg#remove"}/>
 									</svg>
 									<span className="slds-assistive-text">Delete All Items</span>
 								</button>
@@ -29,7 +32,7 @@ class ItemTable extends React.Component {
 								<div className="slds-truncate">Item Name</div>
 							</th>
 							<th scope="col">
-								<div className="slds-truncate">Description</div>
+								<div className="slds-truncate">Item Detail</div>
 							</th>
 							<th scope="col">
 								<div className="slds-truncate">Quantity</div>

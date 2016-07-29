@@ -1,5 +1,7 @@
 import {connect} from 'react-redux';
 import {
+	fetchOrder,
+	fetchItems,
 	deleteItem,
 	deleteAllItems,
 	changeDonation,
@@ -11,12 +13,20 @@ import QOFComponent from '../components/qof-component';
 
 const mapStateToProps = (state) => {
 	return {
+		loading: state.loading,
+		error: state.error,
 		order: state.order,
 		itemList: state.itemList
 	};
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchOrder: (id) => {
+			dispatch(fetchOrder(id));
+		},
+		fetchItems: (orderId) => {
+			dispatch(fetchItems(orderId));
+		},
 		onDeleteItem: (name) => {
 			dispatch(deleteItem(name))
 		},

@@ -7,11 +7,11 @@ export default class AddressInput extends React.Component {
 	}
 	
 	render() {
-		// Generate camelCased DOM Ids
-		const streetId = this.getDomId(this.props.addressType, 'Street');
-		const cityId = this.getDomId(this.props.addressType, 'City');
-		const stateId = this.getDomId(this.props.addressType, 'State');
-		const postalCodeId = this.getDomId(this.props.addressType, 'PostalCode');
+		// Generate DOM Ids
+		const streetId = this.getDomId(this.props.addressType, 'Street__c');
+		const cityId = this.getDomId(this.props.addressType, 'City__c');
+		const stateId = this.getDomId(this.props.addressType, 'State__c');
+		const postalCodeId = this.getDomId(this.props.addressType, 'PostalCode__c');
 		return (
 			<fieldset className="slds-form--compound">
 				<legend className="slds-form-element__label">{this.props.addressType} Address</legend>
@@ -48,15 +48,11 @@ export default class AddressInput extends React.Component {
 	}
 	
 	getDomId(type, field) {
-		var theString = type + field;
-		return this.camelize(theString);
-	}
-	
-	camelize(str) {
-		return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
-			if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
-			return index == 0 ? match.toLowerCase() : match.toUpperCase();
-		});
+		if (type === 'Shipping') {
+			return type + field;
+		} else {
+			return field;
+		}
 	}
 }
 AddressInput.propTypes = {

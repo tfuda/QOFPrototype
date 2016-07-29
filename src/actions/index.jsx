@@ -1,4 +1,5 @@
-export const UPDATE_ORDER = 'UPDATE_ORDER';
+import {vfFetchOrder, vfFetchItems} from '../api';
+
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const DELETE_ALL_ITEMS = 'DELETE_ALL_ITEMS';
@@ -8,23 +9,50 @@ export const CHANGE_DELIVERY_METHOD = 'CHANGE_DELIVERY_METHOD';
 export const COPY_BILLING_TO_SHIPPING = 'COPY_BILLING_TO_SHIPPING';
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
-export const STAT_ERROR = 'ERROR';
-export const STAT_SUCCESS = 'SUCCESS';
+export const FETCH_ORDER = 'FETCH_ORDER';
+export const FETCH_ORDER_SUCCESS = 'FETCH_ORDER_SUCCESS';
+export const FETCH_ORDER_FAILURE = 'FETCH_ORDER_FAILURE';
+export const FETCH_ITEMS = 'FETCH_ITEMS';
+export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
+export const FETCH_ITEMS_FAILURE = 'FETCH_ITEMS_FAILURE';
 
-export function updateOrder() {
-	return {type: UPDATE_ORDER};
-}
-export function updateOrderComplete(status, response) {
-	if (status === STAT_SUCCESS) {
-		return {type: UPDATE_ORDER, status: status, response: response};
-	} else if (status === STAT_ERROR) {
-		return {type: UPDATE_ORDER, status: status, error: error};
-	} else {
-		return {type: UPDATE_ORDER, status: STAT_ERROR, error: 'Unexpected status returned by order update operation.'};
+export function fetchOrder(id) {
+	return (dispatch, getState) => {
+		dispatch({ type: FETCH_ORDER, id: id });
+		vfFetchOrder(id)
+			.then((order) => {
+				dispatch(fetchOrderSuccess(order))
+			})
+			.catch((err) => {
+				dispatch(fetchOrderFailure(err))
+			});
 	}
 }
+export function fetchOrderSuccess(order) {
+	return {type: FETCH_ORDER_SUCCESS, order: order};
+}
+export function fetchOrderFailure(err) {
+	return {type: FETCH_ORDER_FAILURE, error: err};
+}
 
-
+export function fetchItems(orderId) {
+	return (dispatch, getState) => {
+		dispatch({ type: FETCH_ITEMS, orderId: orderId });
+		vfFetchItems(orderId)
+			.then((itemList) => {
+				dispatch(fetchItemsSuccess(itemList))
+			})
+			.catch((err) => {
+				dispatch(fetchItemsFailure(err))
+			});
+	}
+}
+export function fetchItemsSuccess(itemList) {
+	return {type: FETCH_ITEMS_SUCCESS, itemList: itemList};
+}
+export function fetchItemsFailure(err) {
+	return {type: FETCH_ITEMS_FAILURE, error: err};
+}
 
 export function addItem(item) {
 	return {type: ADD_ITEM, item};
