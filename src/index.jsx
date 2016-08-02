@@ -5,10 +5,17 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
-import qofApp from './reducers';
+import rootReducer from './reducers';
 import App from './components/app';
 
-let store = createStore(qofApp, applyMiddleware(thunk));
+const logger = store => next => action => {
+	console.log('dispatching', action)
+	let result = next(action)
+	console.log('next state', store.getState())
+	return result
+}
+
+let store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
 	<Provider store={store}>

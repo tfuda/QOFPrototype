@@ -1,49 +1,45 @@
 import {connect} from 'react-redux';
+import ApiActions from '../actions/api'
 import {
-	fetchOrder,
-	fetchItems,
 	deleteItem,
 	deleteAllItems,
-	changeDonation,
-	changeDeliveryMethod,
-	copyBillingToShipping,
-	inputChange
 } from '../actions';
+import OrderFormActions from '../actions/order-form';
 import QOFComponent from '../components/qof-component';
 
 const mapStateToProps = (state) => {
 	return {
-		loading: state.loading,
-		error: state.error,
+		qofApp: state.qofApp,
 		order: state.order,
-		itemList: state.itemList
+		itemList: state.itemList,
+		orderForm: state.orderForm
 	};
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		fetchOrder: (id) => {
-			dispatch(fetchOrder(id));
+		fetchOrder: (orderId) => {
+			dispatch(ApiActions.fetchOrder(orderId));
 		},
 		fetchItems: (orderId) => {
-			dispatch(fetchItems(orderId));
+			dispatch(ApiActions.fetchItems(orderId));
+		},
+		onOrderFormInputChange: (evt) => {
+			dispatch(OrderFormActions.inputChange(evt));
+		},
+		onDonationChange: (evt) => {
+			dispatch(OrderFormActions.donationChange(evt));
+		},
+		onDeliveryMethodChange: (deliveryMethod) => {
+			dispatch(OrderFormActions.changeDeliveryMethod(deliveryMethod))
+		},
+		onCopyBillingToShipping: () => {
+			dispatch(OrderFormActions.copyBillingToShipping())
 		},
 		onDeleteItem: (name) => {
 			dispatch(deleteItem(name))
 		},
 		onDeleteAllItems: () => {
 			dispatch(deleteAllItems())
-		},
-		onDonationChange: (donationAmount) => {
-			dispatch(changeDonation(donationAmount))
-		},
-		onDeliveryMethodChange: (deliveryMethod) => {
-			dispatch(changeDeliveryMethod(deliveryMethod))
-		},
-		onCopyBillingToShipping: () => {
-			dispatch(copyBillingToShipping())
-		},
-		onInputChange: (field, value) => {
-			dispatch(inputChange(field, value))
 		}
 	}
 }

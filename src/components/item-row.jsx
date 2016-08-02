@@ -7,6 +7,7 @@ class ItemTable extends React.Component {
 	}
 	
 	render() {
+		let item = this.props.item;
 		return (
 			<tr>
 				<td scope="row">
@@ -17,34 +18,23 @@ class ItemTable extends React.Component {
 						<span className="slds-assistive-text">Delete Item</span>
 					</button>
 				</td>
-				<td scope="row">
-					<div className="slds-truncate">{this.props.item.Name}</div>
+				<td scope="row">{item.Name}</td>
+				<td>{item.ItemDetail__c}</td>
+				<td>{item.Quantity__c}</td>
+				<td>
+					<FormattedNumber value={item.UnitPrice__c || 0} style="currency" currency="USD" currencyDisplay="symbol"/>
 				</td>
 				<td>
-					<div className="slds-truncate">{this.props.item.ItemDetail__c}</div>
+					<FormattedNumber value={item.UnitFee__c || 0} style="currency" currency="USD" currencyDisplay="symbol"/>
 				</td>
 				<td>
-					<div className="slds-truncate">{this.props.item.Quantity__c}</div>
+					<FormattedNumber value={item.Subtotal__c || 0} style="currency" currency="USD" currencyDisplay="symbol"/>
 				</td>
 				<td>
-					<div className="slds-truncate"><FormattedNumber value={this.props.item.UnitPrice__c || 0} style="currency"
-					                                                currency="USD" currencyDisplay="symbol"/></div>
+					<FormattedNumber value={item.DiscountTotal__c || 0} style="currency" currency="USD" currencyDisplay="symbol"/>
 				</td>
 				<td>
-					<div className="slds-truncate"><FormattedNumber value={this.props.item.UnitFee__c || 0} style="currency"
-					                                                currency="USD" currencyDisplay="symbol"/></div>
-				</td>
-				<td>
-					<div className="slds-truncate"><FormattedNumber value={this.props.item.Subtotal__c || 0} style="currency"
-					                                                currency="USD" currencyDisplay="symbol"/></div>
-				</td>
-				<td>
-					<div className="slds-truncate"><FormattedNumber value={this.props.item.DiscountTotal__c || 0} style="currency"
-					                                                currency="USD" currencyDisplay="symbol"/></div>
-				</td>
-				<td>
-					<div className="slds-truncate"><FormattedNumber value={this.props.item.OrderItemTotal__c} style="currency"
-					                                                currency="USD" currencyDisplay="symbol"/></div>
+					<FormattedNumber value={item.OrderItemTotal__c} style="currency" currency="USD" currencyDisplay="symbol"/>
 				</td>
 			</tr>
 		);

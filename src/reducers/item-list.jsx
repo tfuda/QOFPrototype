@@ -1,21 +1,11 @@
 import {
-	ADD_ITEM,
-	DELETE_ITEM,
-	DELETE_ALL_ITEMS
+	FETCH_ITEMS_SUCCESS
 } from '../actions'
 
 export default function itemList(state = [], action) {
 	switch (action.type) {
-		case ADD_ITEM:
-			// TODO
-			return state;
-		case DELETE_ITEM:
-			let itemList = state.filter(function (item) {
-				return item.Name !== action.itemName;
-			});
-			return itemList;
-		case DELETE_ALL_ITEMS:
-			return [];
+		case FETCH_ITEMS_SUCCESS:
+			return action.itemList;
 		default:
 			return state;
 	}

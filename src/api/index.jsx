@@ -33,3 +33,21 @@ export function vfFetchItems(orderId) {
 	return promise;
 }
 
+export function vfSetDonationAmount(orderId, donationAmount) {
+	var promise = new Promise((resolve, reject) => {
+		QOFController.setDonationAmount(
+			orderId.substring(0,15),
+			donationAmount,
+			(result, event) => {
+				if (event.status) {
+					resolve(result);
+				} else {
+					reject(event.message);
+				}
+			},
+			{escape: false}
+		);
+	});
+	return promise;
+}
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectElement from './select-element';
+import SldsSelect from './slds-select';
 
 const STATE_LIST = [
 	{label: 'Alabama', value: 'AL'},
@@ -22,18 +22,20 @@ class StateSelect extends React.Component {
 	
 	render() {
 		return (
-			<SelectElement selectOptions={STATE_LIST} selectValue={this.props.selectedState}
-			               label={this.props.label} domId={this.props.stateElementId} size={this.props.size}
-			               onChange={this.props.onChange}/>
+			<SldsSelect fieldName={this.props.fieldName} value={this.props.value} onChange={this.props.onChange}
+			            selectOptions={STATE_LIST} label={this.props.label} size={this.props.size} />
 		);
 	}
 }
 StateSelect.propTypes = {
-	selectedState: React.PropTypes.string,
-	stateElementId: React.PropTypes.string.isRequired,
+	fieldName: React.PropTypes.string.isRequired,
+	value: React.PropTypes.string.isRequired,
+	onChange: React.PropTypes.func.isRequired,
 	label: React.PropTypes.string,
-	size: React.PropTypes.string,
-	onChange: React.PropTypes.func.isRequired
+	size: React.PropTypes.string
 }
-StateSelect.defaultProps = {label: 'State', size: '1'}
+StateSelect.defaultProps = {
+	label: 'State',
+	size: '1'
+}
 export default StateSelect
