@@ -5,11 +5,11 @@ import {
 	deleteAllItems,
 } from '../actions';
 import OrderFormActions from '../actions/order-form';
-import QOFComponent from '../components/qof-component';
+import BOComponent from '../components/bo-component';
 
 const mapStateToProps = (state) => {
 	return {
-		qofApp: state.qofApp,
+		boApp: state.boApp,
 		order: state.order,
 		itemList: state.itemList,
 		orderForm: state.orderForm
@@ -43,8 +43,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		}
 	}
 }
-const QOFContainer = connect(
+const BOContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(QOFComponent)
-export default QOFContainer;
+)(BOComponent)
+export default BOContainer;

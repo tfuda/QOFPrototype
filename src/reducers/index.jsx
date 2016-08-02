@@ -14,7 +14,7 @@ import itemList from './item-list';
 
 
 const initialState = {
-	qofApp: {
+	boApp: {
 		// TODO - This is the hard coded ID of an existing reservation order
 		orderId: 'a0o36000001YcBGAA0',
 		loadingOrder: true,
@@ -26,7 +26,7 @@ const initialState = {
 	orderForm: {}
 }
 
-function qofApp(state = {}, action) {
+function boApp(state = {}, action) {
 	switch (action.type) {
 		case FETCH_ORDER:
 		case SET_DON_AMT:
@@ -48,7 +48,7 @@ function qofApp(state = {}, action) {
 
 function rootReducer(state = initialState, action) {
 	return {
-		qofApp: qofApp(state.qofApp, action),
+		boApp: boApp(state.boApp, action),
 		order: order(state.order, action),
 		itemList: itemList(state.itemList, action),
 		orderForm: orderForm(state.orderForm, action)

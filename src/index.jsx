@@ -6,7 +6,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
-import App from './components/app';
+import BOApp from './components/bo-app';
 
 const logger = store => next => action => {
 	console.log('dispatching', action)
@@ -20,7 +20,7 @@ let store = createStore(rootReducer, applyMiddleware(thunk, logger));
 ReactDOM.render(
 	<Provider store={store}>
 		<IntlProvider locale="en">
-			<App />
+			<BOApp />
 		</IntlProvider>
 	</Provider>,
 	document.querySelector('#qofPrototype')

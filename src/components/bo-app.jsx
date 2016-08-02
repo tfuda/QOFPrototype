@@ -1,7 +1,7 @@
 import React from 'react';
-import QOFContainer from '../containers/qof-container';
+import BOContainer from '../containers/bo-container';
 
-export default class App extends React.Component {
+export default class BOApp extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -9,7 +9,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="slds">
-				<QOFContainer/>
+				<BOContainer/>
 			</div>
 		);
 	}

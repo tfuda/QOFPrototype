@@ -4,11 +4,11 @@ import ItemTable from './item-table';
 import OrderForm from './order-form';
 import Footer from './footer';
 
-class QOFComponent extends React.Component {
+class BOComponent extends React.Component {
 	componentDidMount() {
-		this.props.fetchOrder(this.props.qofApp.orderId);
-		if (this.props.qofApp.orderId) {
-			this.props.fetchItems(this.props.qofApp.orderId);
+		this.props.fetchOrder(this.props.boApp.orderId);
+		if (this.props.boApp.orderId) {
+			this.props.fetchItems(this.props.boApp.orderId);
 		}
 	}
 	render() {
@@ -17,12 +17,12 @@ class QOFComponent extends React.Component {
 			overflowY : 'auto',
 			overflowX : 'hidden'
 		};
-		const {qofApp, order, itemList, orderForm, ...other} = this.props;
-		if (qofApp.loadingOrder || qofApp.loadingItems) {
+		const {boApp, order, itemList, orderForm, ...other} = this.props;
+		if (boApp.loadingOrder || boApp.loadingItems) {
 			return <div className="slds-container--fluid">Loading...</div>
 		} else {
-			if (qofApp.error) {
-				return <div className="slds-container--fluid">{qofApp.error}</div>
+			if (boApp.error) {
+				return <div className="slds-container--fluid">{boApp.error}</div>
 			} else {
 				return (
 					<div>
@@ -44,5 +44,5 @@ class QOFComponent extends React.Component {
 		}
 	}
 }
-export default QOFComponent;
+export default BOComponent;
 
