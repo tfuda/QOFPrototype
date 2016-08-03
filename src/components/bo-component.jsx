@@ -1,6 +1,6 @@
 import React from 'react';
+import {Router, Route, hashHistory} from 'react-router'
 import Header from './header';
-import ItemTable from './item-table';
 import OrderForm from './order-form';
 import Footer from './footer';
 
@@ -17,7 +17,7 @@ class BOComponent extends React.Component {
 			overflowY : 'auto',
 			overflowX : 'hidden'
 		};
-		const {boApp, order, itemList, orderForm, ...other} = this.props;
+		const {boApp, order, ...other} = this.props;
 		if (boApp.loadingOrder || boApp.loadingItems) {
 			return <div className="slds-container--fluid">Loading...</div>
 		} else {
@@ -29,11 +29,8 @@ class BOComponent extends React.Component {
 						<div className="slds-container--fluid">
 							<Header order={order} />
 						</div>
-						<div style={style}>
-							<div className="slds-container--fluid">
-								<ItemTable itemList={itemList} onDeleteItem={this.props.onDeleteItem} onDeleteAllItems={this.props.onDeleteAllItems}/>
-								<OrderForm orderForm={orderForm} onInputChange={this.props.onOrderFormInputChange} onDonationChange={this.props.onDonationChange} />
-							</div>
+						<div className="slds-scrollable--y" style={style}>
+							<OrderForm {...other} onInputChange={this.props.onOrderFormInputChange} onDonationChange={this.props.onDonationChange} />
 						</div>
 						<div className="slds-container--fluid">
 							<Footer/>

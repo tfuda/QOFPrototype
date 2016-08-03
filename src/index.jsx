@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {IntlProvider} from 'react-intl';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {IntlProvider} from 'react-intl'
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
 
-import rootReducer from './reducers';
-import BOApp from './components/bo-app';
+import rootReducer from './reducers'
+import BOApp from './components/bo-app'
 
 const logger = store => next => action => {
 	console.log('dispatching', action)
@@ -15,7 +15,7 @@ const logger = store => next => action => {
 	return result
 }
 
-let store = createStore(rootReducer, applyMiddleware(thunk, logger));
+let store = createStore(rootReducer, applyMiddleware(thunk, logger))
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -24,4 +24,4 @@ ReactDOM.render(
 		</IntlProvider>
 	</Provider>,
 	document.querySelector('#qofPrototype')
-);
+)
